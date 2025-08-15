@@ -1,0 +1,823 @@
+# FarmBuddee - Complete Requirements & Knowledge Base Document
+
+## Development Rules
+### Build the app in phases and each phase step by step with required screens, each screen should be beautiful and responsive. 
+
+### Summarize the conversation and save it to history.md, maintain app structure like which all screens will be developed and status of the development, include folder structure, also add routes. 
+
+### Add the details of what should be the next implementation. 
+
+### Always create new files for each section or module under the respective page folder and integrate the functionality into a single page so that these sections or modules can be reused. 
+
+### Try to limit each file to max 250 lines.
+
+### Executive Summary
+
+### Vision
+Create India's first comprehensive agricultural services marketplace connecting farmers with equipment owners and skilled agricultural workers, enabling seamless booking, transparent pricing, and reliable service delivery.
+
+### Mission
+Digitize agricultural service procurement by providing a platform where farmers can easily access tractors, equipment, and skilled labor while enabling service providers to maximize their asset utilization and income.
+
+### Key Value Propositions
+- **For Farmers**: Easy access to equipment and skilled labor, transparent pricing, reliable service delivery
+- **For Service Providers**: Increased asset utilization, steady income, reduced customer acquisition costs
+- **For Platform**: Transaction-based revenue model with scalable operations
+
+### Business Model
+Commission-based marketplace (10-15% per transaction) similar to Uber/Ola, focusing on agricultural services in rural India.
+
+---
+
+
+### Target Geographic Market
+
+#### Launch Districts (Priority Order)
+1. **Nizamabad & Kamareddy** (Pilot districts)
+2. **Medak** (High agricultural activity)
+3. **Karimnagar** (Major farming hub)
+4. **Mahabubnagar** (Large agricultural area)
+5. **Warangal** (Diverse crop patterns)
+6. **Jagtial** (Intensive farming)
+7. **Adilabad** (Cotton belt)
+
+#### Market Characteristics per District
+- **Nizamabad**: 1,823 villages, 95% agricultural households, major crops: paddy, turmeric, sugarcane
+- **Karimnagar**: 1,142 villages, strong cooperative presence, mechanization rate: 65%
+- **Medak**: 1,100 villages, water-intensive crops, high tractor density
+
+#### Competitive Advantages
+- Mobile-first approach for rural users
+- Bilingual support (Telugu/English)
+- Local partnership network
+- Transparent pricing and ratings
+
+---
+
+## User Personas & Journey
+
+### Primary Personas
+
+#### Persona 1: Ramesh - Small Farmer (Service Seeker)
+- **Demographics**: Age 35-45, owns 3-5 acres, smartphone user
+- **Pain Points**: Difficulty finding reliable equipment/labor, price negotiation hassles, seasonal availability issues
+- **Goals**: Complete farming operations on time, reduce costs, ensure quality work
+- **Technology Comfort**: Moderate, uses WhatsApp, basic apps
+
+#### Persona 2: Suresh - Tractor Owner (Service Provider)
+- **Demographics**: Age 30-50, owns 1-2 tractors, provides custom services
+- **Pain Points**: Finding customers, idle equipment during off-season, payment delays
+- **Goals**: Maximize equipment utilization, steady income, expand customer base
+- **Technology Comfort**: Basic to moderate, willing to learn for business growth
+
+#### Persona 3: Kumar - Agricultural Labor (Service Provider)
+- **Demographics**: Age 25-55, skilled in specific operations, seasonal work
+- **Pain Points**: Irregular work, low bargaining power, transportation to work sites
+- **Goals**: Consistent work opportunities, fair wages, skill recognition
+- **Technology Comfort**: Basic, needs simple interface
+
+### User Journey Maps
+
+#### Farmer Journey (Service Seeker)
+1. **Discovery**: Opens app, sees available services in area
+2. **Search**: Filters by service type, date, budget
+3. **Compare**: Views provider profiles, ratings, pricing
+4. **Book**: Creates service request or accepts quote
+5. **Track**: Monitors service provider location/status
+6. **Receive**: Service delivered and verified
+7. **Pay**: Secure payment through escrow
+8. **Rate**: Provides feedback and rating
+
+#### Service Provider Journey
+1. **Registration**: Profile creation, document verification
+2. **Setup**: Service offerings, pricing, availability
+3. **Discovery**: Receives nearby service requests
+4. **Quote**: Submits competitive bids or accepts fixed pricing
+5. **Accept**: Confirms booking and service details
+6. **Deliver**: Performs service, updates status
+7. **Complete**: Job completion verification
+8. **Payment**: Receives payment minus platform commission
+
+---
+
+## Feature Requirements
+
+### MVP Features
+
+#### Core Platform Features
+
+##### User Management
+- **Registration & Authentication**
+  - Mobile number-based OTP verification
+  - Aadhaar integration for identity verification
+  - Profile creation (personal details, location, photo)
+  - Two-factor authentication
+
+- **Profile Management**
+  - Personal information (name, age, location, experience)
+  - Document uploads (licenses, certificates, land records)
+  - Profile photo and verification status
+  - Rating and review history
+
+##### Service Management
+- **Service Categories**
+  - **Equipment Services**: Tractor operations, harvesting, spraying
+  - **Labor Services**: Manual plowing, fertilizing, weeding, spraying
+  - **Combo Services**: Equipment + operator packages
+
+- **Service Listing (Provider Side)**
+  - Add services with descriptions and pricing
+  - Set location as per pincode and Village, Mandal, District
+  - Set availability calendar
+  - Define service radius (5-10km)
+  - Upload equipment/skill verification documents
+
+- **Service Discovery (Seeker Side)**
+  - Location-based service search
+  - Filter by service type, date, price range
+  - View provider profiles and ratings
+  - Compare multiple providers
+
+##### Booking & Matching System
+- **Request Creation**
+  - Service type selection
+  - Date/time requirements
+  - Farm location and area details
+  - Budget range or fixed price
+  - Special instructions
+
+- **Provider Matching**
+  - Automatic notifications to nearby providers
+  - Bidding system for competitive pricing
+  - Fixed price acceptance
+  - Response time tracking (2-hour window)
+
+##### Communication System
+- **In-App Chat**
+  - Text messaging between users
+  - Image sharing (field photos, equipment images)
+  - Voice message support
+  - Message translation (Telugu-English)
+
+##### Payment System
+- **Escrow Integration**
+  - UPI payment integration (PhonePe, Google Pay, Paytm)
+  - Razorpay gateway for cards and wallets
+  - Payment hold until service completion
+  - Automatic release after verification
+
+- **Pricing Models**
+  - Hourly rates
+  - Per-acre pricing
+  - Daily/monthly rental rates
+  - Fixed project pricing
+
+##### Rating & Review System
+- **Bidirectional Ratings**
+  - 5-star rating system
+  - Written review option
+  - Photo/video evidence support
+  - Rating-based provider ranking
+
+##### Basic Admin Panel
+- **User Management**
+  - View and manage user profiles
+  - Verify documents and accounts
+  - Handle disputes and complaints
+  - Monitor platform activity
+
+---
+
+## Technical Architecture
+
+### System Architecture Overview
+
+#### High-Level Architecture
+```
+Mobile Apps (Android/iOS) ←→ Load Balancer ←→ API Gateway ←→ Microservices ←→ Database Cluster
+                   ↓                                                    ↓
+            Web Application ←→ CDN ←→ File Storage ←→ Cache Layer ←→ Analytics Engine
+```
+
+### Technology Stack Recommendations
+
+#### Frontend
+- **Mobile Apps**: 
+  - **Android**: React Native
+  - **iOS**: React Native
+  - **Cross-platform alternative**: React Native or Flutter
+
+- **Web Application**: 
+  - **Framework**: Next.js or React.js with TypeScript
+  - **Styling**: Tailwind CSS or Material-UI
+  - **State Management**: Redux or Zustand
+
+#### Backend
+- **Primary Language**: .Net or Node.js with TypeScript
+- **API Architecture**: RESTful APIs with GraphQL for complex queries
+- **Authentication**: JWT tokens with refresh token mechanism
+- **Real-time Communication**: WebSocket (Socket.io) for chat and notifications
+
+#### Database
+- **Primary Database**: PostgreSQL for transactional data
+- **Cache Layer**: Redis for session management and caching
+- **File Storage**: AWS S3 or Azure Blob storage
+- **Search Engine**: Elasticsearch for service discovery
+
+#### Infrastructure
+- **Cloud Platform**: AWS or Azure
+- **Container Orchestration**: Docker with Kubernetes
+- **CI/CD**: GitHub Actions
+- **Monitoring**: New Relic or DataDog
+
+#### Third-party Integrations
+- **Payment Gateways**: Razorpay, UPI APIs
+- **Maps & Location**: Google Maps API, Mapbox
+- **SMS/OTP**: Twilio, AWS SNS
+- **Push Notifications**: Firebase Cloud Messaging
+- **Weather Data**: OpenWeatherMap API
+
+### Scalability Considerations
+
+#### Performance Requirements
+- **Response Time**: < 3 seconds for API calls
+- **Concurrent Users**: Support 1,000+ concurrent users
+- **Database**: Handle 10,000+ transactions per day
+- **File Upload**: Support image/video uploads up to 10MB
+
+#### Security Requirements
+- **Data Encryption**: AES-256 for data at rest, TLS 1.3 for data in transit
+- **Authentication**: Multi-factor authentication for sensitive operations
+- **API Security**: Rate limiting, input validation, SQL injection protection
+- **Privacy Compliance**: GDPR-style data protection measures
+
+---
+
+## Database Schema
+
+### Core Entities
+
+#### Users Table
+```sql
+CREATE TABLE users (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    phone_number VARCHAR(15) UNIQUE NOT NULL,
+    email VARCHAR(255),
+    full_name VARCHAR(255) NOT NULL,
+    date_of_birth DATE,
+    gender ENUM('male', 'female', 'other'),
+    profile_image_url VARCHAR(500),
+    address TEXT,
+    district VARCHAR(100),
+    mandal VARCHAR(100),
+    village VARCHAR(100),
+    pincode VARCHAR(10),
+    aadhaar_number VARCHAR(12),
+    is_verified BOOLEAN DEFAULT FALSE,
+    user_type ENUM('seeker', 'provider', 'both') NOT NULL,
+    status ENUM('active', 'inactive', 'suspended') DEFAULT 'active',
+    created_at TIMESTAMP DEFAULT NOW(),
+    updated_at TIMESTAMP DEFAULT NOW()
+);
+```
+
+#### Services Table
+```sql
+CREATE TABLE services (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    provider_id UUID REFERENCES users(id),
+    category_id UUID REFERENCES service_categories(id),
+    title VARCHAR(255) NOT NULL,
+    description TEXT,
+    pricing_model ENUM('hourly', 'per_acre', 'daily', 'monthly', 'fixed') NOT NULL,
+    base_price DECIMAL(10,2) NOT NULL,
+    max_price DECIMAL(10,2),
+    service_radius INTEGER DEFAULT 25, -- in kilometers
+    equipment_required BOOLEAN DEFAULT FALSE,
+    equipment_provided BOOLEAN DEFAULT FALSE,
+    operator_provided BOOLEAN DEFAULT FALSE,
+    availability_calendar JSON, -- {date: available_hours}
+    minimum_booking_hours INTEGER DEFAULT 1,
+    advance_booking_days INTEGER DEFAULT 30,
+    cancellation_policy TEXT,
+    terms_conditions TEXT,
+    is_active BOOLEAN DEFAULT TRUE,
+    created_at TIMESTAMP DEFAULT NOW(),
+    updated_at TIMESTAMP DEFAULT NOW()
+);
+```
+
+#### Service Categories Table
+```sql
+CREATE TABLE service_categories (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    name VARCHAR(255) NOT NULL,
+    name_telugu VARCHAR(255),
+    description TEXT,
+    icon_url VARCHAR(500),
+    parent_category_id UUID REFERENCES service_categories(id),
+    sort_order INTEGER DEFAULT 0,
+    is_active BOOLEAN DEFAULT TRUE,
+    created_at TIMESTAMP DEFAULT NOW()
+);
+```
+
+#### Bookings Table
+```sql
+CREATE TABLE bookings (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    seeker_id UUID REFERENCES users(id),
+    provider_id UUID REFERENCES users(id),
+    service_id UUID REFERENCES services(id),
+    booking_type ENUM('direct', 'bidding') NOT NULL,
+    farm_location POINT NOT NULL, -- GPS coordinates
+    farm_address TEXT,
+    area_acres DECIMAL(8,2),
+    scheduled_date DATE NOT NULL,
+    scheduled_start_time TIME,
+    scheduled_end_time TIME,
+    actual_start_time TIMESTAMP,
+    actual_end_time TIMESTAMP,
+    quoted_amount DECIMAL(10,2) NOT NULL,
+    final_amount DECIMAL(10,2),
+    platform_fee DECIMAL(8,2),
+    payment_status ENUM('pending', 'held', 'released', 'refunded') DEFAULT 'pending',
+    booking_status ENUM('requested', 'accepted', 'in_progress', 'completed', 'cancelled', 'disputed') DEFAULT 'requested',
+    special_instructions TEXT,
+    cancellation_reason TEXT,
+    created_at TIMESTAMP DEFAULT NOW(),
+    updated_at TIMESTAMP DEFAULT NOW()
+);
+```
+
+#### Bids Table
+```sql
+CREATE TABLE bids (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    booking_id UUID REFERENCES bookings(id),
+    provider_id UUID REFERENCES users(id),
+    quoted_amount DECIMAL(10,2) NOT NULL,
+    estimated_duration_hours INTEGER,
+    additional_charges TEXT,
+    bid_message TEXT,
+    bid_status ENUM('pending', 'accepted', 'rejected', 'expired') DEFAULT 'pending',
+    expires_at TIMESTAMP NOT NULL,
+    created_at TIMESTAMP DEFAULT NOW()
+);
+```
+
+#### Reviews Table
+```sql
+CREATE TABLE reviews (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    booking_id UUID REFERENCES bookings(id),
+    reviewer_id UUID REFERENCES users(id),
+    reviewee_id UUID REFERENCES users(id),
+    rating INTEGER CHECK (rating >= 1 AND rating <= 5),
+    review_text TEXT,
+    review_images JSON, -- array of image URLs
+    response_text TEXT, -- response from reviewee
+    is_anonymous BOOLEAN DEFAULT FALSE,
+    created_at TIMESTAMP DEFAULT NOW()
+);
+```
+
+#### Payments Table
+```sql
+CREATE TABLE payments (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    booking_id UUID REFERENCES bookings(id),
+    payer_id UUID REFERENCES users(id),
+    payee_id UUID REFERENCES users(id),
+    payment_gateway VARCHAR(50) NOT NULL,
+    gateway_transaction_id VARCHAR(255),
+    gross_amount DECIMAL(10,2) NOT NULL,
+    platform_fee DECIMAL(8,2) NOT NULL,
+    net_amount DECIMAL(10,2) NOT NULL,
+    payment_method VARCHAR(50),
+    payment_status ENUM('initiated', 'successful', 'failed', 'refunded') DEFAULT 'initiated',
+    escrow_status ENUM('held', 'released', 'disputed') DEFAULT 'held',
+    processed_at TIMESTAMP,
+    created_at TIMESTAMP DEFAULT NOW()
+);
+```
+
+### Indexes and Performance Optimization
+
+```sql
+-- Location-based search optimization
+CREATE INDEX idx_users_location ON users USING GIST(ST_Point(longitude, latitude));
+CREATE INDEX idx_bookings_farm_location ON bookings USING GIST(farm_location);
+
+-- Status-based queries
+CREATE INDEX idx_bookings_status_date ON bookings(booking_status, scheduled_date);
+CREATE INDEX idx_services_active_category ON services(is_active, category_id);
+
+-- User performance
+CREATE INDEX idx_users_phone_verified ON users(phone_number, is_verified);
+CREATE INDEX idx_reviews_rating_user ON reviews(reviewee_id, rating);
+```
+
+---
+
+## API Specifications
+
+### Authentication APIs
+
+#### POST /api/auth/send-otp
+```json
+Request:
+{
+  "phone_number": "+919876543210"
+}
+
+Response:
+{
+  "success": true,
+  "message": "OTP sent successfully",
+  "otp_id": "uuid"
+}
+```
+
+#### POST /api/auth/verify-otp
+```json
+Request:
+{
+  "phone_number": "+919876543210",
+  "otp": "123456",
+  "otp_id": "uuid"
+}
+
+Response:
+{
+  "success": true,
+  "user": {...},
+  "access_token": "jwt_token",
+  "refresh_token": "refresh_token"
+}
+```
+
+### User Management APIs
+
+#### GET /api/users/profile
+```json
+Headers: Authorization: Bearer {jwt_token}
+
+Response:
+{
+  "user": {
+    "id": "uuid",
+    "phone_number": "+919876543210",
+    "full_name": "Ramesh Kumar",
+    "profile_image_url": "https://...",
+    "location": {
+      "district": "Nizamabad",
+      "mandal": "Birkur",
+      "village": "Damarancha",
+      "pincode": "503321"
+    },
+    "verification_status": "verified",
+    "rating": 4.5,
+    "total_reviews": 23
+  }
+}
+```
+
+#### PUT /api/users/profile
+```json
+Request:
+{
+  "full_name": "Ramesh Kumar",
+  "date_of_birth": "1985-06-15",
+  "address": "H.No. 123, Main Road",
+  "district": "Nizamabad",
+  "Mandal": "Birkur",
+  "Village": "Damarancha",
+  "Pincode": "503321"
+}
+
+Response:
+{
+  "success": true,
+  "message": "Profile updated successfully"
+}
+```
+
+### Service Management APIs
+
+#### GET /api/services/search
+```json
+Query Parameters:
+- latitude: 18.6733
+- longitude: 78.0955
+- radius: 25 (km)
+- category_id: uuid
+- date: "2024-03-15"
+- min_price: 500
+- max_price: 2000
+
+Response:
+{
+  "services": [
+    {
+      "id": "uuid",
+      "title": "Tractor Plowing Service",
+      "provider": {
+        "name": "Suresh",
+        "rating": 4.2,
+        "total_reviews": 15
+      },
+      "pricing": {
+        "model": "per_acre",
+        "base_price": 800,
+        "currency": "INR"
+      },
+      "availability": {
+        "date": "2024-03-15",
+        "slots": ["09:00-12:00", "14:00-17:00"]
+      },
+      "distance_km": 8.5
+    }
+  ],
+  "total": 12,
+  "page": 1
+}
+```
+
+#### POST /api/services
+```json
+Request:
+{
+  "category_id": "uuid",
+  "title": "Tractor Plowing Service",
+  "description": "Professional plowing service with modern tractor",
+  "pricing_model": "per_acre",
+  "base_price": 800,
+  "service_radius": 30,
+  "equipment_provided": true,
+  "operator_provided": true
+}
+
+Response:
+{
+  "success": true,
+  "service_id": "uuid",
+  "message": "Service created successfully"
+}
+```
+
+### Booking Management APIs
+
+#### POST /api/bookings
+```json
+Request:
+{
+  "service_id": "uuid",
+  "booking_type": "direct",
+  "farm_location": {
+    "latitude": 18.6733,
+    "longitude": 78.0955,
+    "address": "Survey No. 123, Village Name"
+  },
+  "area_acres": 5.5,
+  "scheduled_date": "2024-03-15",
+  "scheduled_start_time": "09:00",
+  "special_instructions": "Field has some stones, please be careful"
+}
+
+Response:
+{
+  "success": true,
+  "booking_id": "uuid",
+  "quoted_amount": 4400,
+  "message": "Booking created successfully"
+}
+```
+
+#### GET /api/bookings/{booking_id}
+```json
+Response:
+{
+  "booking": {
+    "id": "uuid",
+    "seeker": {...},
+    "provider": {...},
+    "service": {...},
+    "status": "in_progress",
+    "scheduled_date": "2024-03-15",
+    "actual_start_time": "2024-03-15T09:15:00Z",
+    "location": {...},
+    "amount": 4400,
+    "payment_status": "held"
+  }
+}
+```
+
+### Communication APIs
+
+#### GET /api/chat/conversations
+```json
+Response:
+{
+  "conversations": [
+    {
+      "id": "uuid",
+      "participant": {
+        "id": "uuid",
+        "name": "Suresh",
+        "profile_image": "https://..."
+      },
+      "last_message": {
+        "text": "I'll reach your field by 9 AM",
+        "timestamp": "2024-03-14T20:30:00Z",
+        "sender_id": "uuid"
+      },
+      "unread_count": 2,
+      "booking_id": "uuid"
+    }
+  ]
+}
+```
+
+#### GET /api/chat/conversations/{conversation_id}/messages
+```json
+Response:
+{
+  "messages": [
+    {
+      "id": "uuid",
+      "sender_id": "uuid",
+      "message_type": "text",
+      "content": "Hello, when can you start the plowing work?",
+      "timestamp": "2024-03-14T18:00:00Z",
+      "is_read": true
+    },
+    {
+      "id": "uuid",
+      "sender_id": "uuid",
+      "message_type": "image",
+      "content": "https://storage.../field_image.jpg",
+      "timestamp": "2024-03-14T18:05:00Z",
+      "is_read": false
+    }
+  ]
+}
+```
+
+### Payment APIs
+
+#### POST /api/payments/initiate
+```json
+Request:
+{
+  "booking_id": "uuid",
+  "payment_method": "upi",
+  "gateway": "razorpay"
+}
+
+Response:
+{
+  "success": true,
+  "payment_id": "uuid",
+  "gateway_order_id": "order_xyz123",
+  "amount": 4400,
+  "currency": "INR"
+}
+```
+
+#### POST /api/payments/verify
+```json
+Request:
+{
+  "payment_id": "uuid",
+  "gateway_payment_id": "pay_xyz123",
+  "gateway_signature": "signature_hash"
+}
+
+Response:
+{
+  "success": true,
+  "payment_status": "successful",
+  "escrow_status": "held"
+}
+```
+
+---
+
+## UI/UX Guidelines
+
+### Design Principles
+
+#### User-Centric Design
+- **Simple Navigation**: Maximum 3 taps to reach any feature
+- **Visual Hierarchy**: Clear distinction between primary and secondary actions
+- **Accessibility**: Support for users with varying literacy levels
+- **Offline Capability**: Core features work with limited connectivity
+
+#### Regional Customization
+- **Language Support**: Telugu and English with easy switching
+- **Cultural Sensitivity**: Icons and imagery relevant to farming community
+- **Local Context**: District and crop-specific information display
+
+### Mobile App Design Guidelines
+
+#### Color Scheme
+- **Primary **: (Agricultural theme, growth, prosperity)
+- **Secondary **: (Energy, enthusiasm, harvest)
+- **Background**:  (Clean, readable)
+
+
+#### Typography
+- **Primary Font**: Roboto (English), Noto Sans Telugu (Telugu)
+- **Headers**: 18-24px, Bold
+- **Body Text**: 14-16px, Regular
+- **Captions**: 12px, Regular
+
+#### Icon Design
+- **Style**: Material Design icons with agricultural customizations
+- **Size**: 24dp (small), 32dp (medium), 48dp (large)
+- **Tractors, Equipment**: Custom designed icons for better recognition
+
+
+```
+
+### Web Application Guidelines
+
+#### Dashboard Layout
+- **Left Sidebar**: Navigation menu with collapsible sections
+- **Main Content**: Dynamic content area with responsive grid
+- **Right Panel**: Notifications, quick actions, weather widget
+- **Header**: User profile, location selector, language toggle
+
+#### Responsive Design
+- **Desktop**: Full-featured dashboard with data tables
+- **Tablet**: Condensed view with swipeable cards
+- **Mobile**: Stack layout with bottom navigation
+
+### Accessibility Features
+
+#### Visual Accessibility
+- **High Contrast Mode**: For users with visual impairments
+- **Font Size Options**: 14px, 16px, 18px selectable
+- **Icon Labels**: Text labels for all interactive elements
+
+#### Motor Accessibility
+- **Large Touch Targets**: Minimum 44px tap areas
+- **Voice Commands**: Basic voice navigation support
+- **Gesture Alternatives**: Swipe alternatives for critical actions
+
+#### Cognitive Accessibility
+- **Simple Language**: Avoid complex technical terms
+- **Progress Indicators**: Clear steps in multi-step processes
+- **Error Prevention**: Confirmation dialogs for irreversible actions
+
+---
+
+## Implementation Roadmap
+
+### MVP Development
+
+
+#### Core Feature Development
+**User Management**
+- Registration and profile management
+- Document verification system
+- Location-based services integration
+- Multi-language support (Telugu/English)
+
+**Service Management**
+- Service category management
+- Service listing and search functionality
+- Provider profile and service management
+- Basic matching algorithm
+
+#### Booking & Payment Integration
+**Booking System**
+- Booking creation and management
+- Basic bidding system
+- Service request notifications
+- Booking status tracking
+
+**Payment Integration**
+- Razorpay payment gateway integration
+- UPI payment support
+- Escrow system implementation
+- Transaction management
+
+**Testing & Quality Assurance**
+- Comprehensive testing across devices
+- Security testing and vulnerability assessment
+- Performance optimization
+- User acceptance testing with pilot users
+
+Enhancement Recommendations:
+
+
+Normalize Location Data: The users table uses VARCHAR for district, mandal, and village. This can lead to spelling errors and inconsistent data (e.g., "Nizamabad" vs. "Nizambad").
+
+Schema Change: Create districts, mandals, and villages tables with predefined names. Use foreign key IDs in the users table. This standardizes location data, making location-based matching far more accurate and reliable.
+
+
+Enhance Farm Location Data: The bookings table uses a POINT for farm_location. While good, a single point doesn't capture the area of a farm.
+
+Future-Proofing: Consider using a geospatial data type like POLYGON (available with extensions like PostGIS in PostgreSQL). This would allow farmers to draw their farm boundary on the map, leading to more accurate area calculations and eliminating disputes over the size of the job.
